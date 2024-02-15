@@ -1,0 +1,26 @@
+{
+  "name": "newsletter-backend",
+  "version": "1.0.0",
+  "description": "a backend service to send newsletters to registered users",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/debugger0x/Newsletter-Backend.git"
+  },
+  "keywords": [
+    "newsletter"
+  ],
+  "author": "johnpaul nnaji",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/debugger0x/Newsletter-Backend/issues"
+  },
+  "homepage": "https://github.com/debugger0x/Newsletter-Backend#readme",
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.11.19"
+  }
+}
