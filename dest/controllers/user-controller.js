@@ -10,8 +10,11 @@ const subscribe = async (req, res, next) => {
     const { email } = req.body;
     if (!email)
         return next(new appError_1.default('Enter your email', 401));
-    const user = await user_model_1.default.create(email);
-    res
+    const body = {
+        email,
+    };
+    const user = await user_model_1.default.create(body);
+    return res
         .status(201)
         .json({ status: 'success', message: 'Email added', data: { user } });
 };
