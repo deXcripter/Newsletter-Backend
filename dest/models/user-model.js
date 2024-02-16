@@ -17,6 +17,15 @@ const userSchema = new mongoose_1.default.Schema({
         trim: true,
         lowercase: true,
     },
+    active: {
+        type: Boolean,
+        default: true,
+        select: false,
+    },
+});
+userSchema.pre(/^find/, function (next) {
+    this.find({ active: { $ne: false } });
+    next();
 });
 const User = mongoose_1.default.model('User', userSchema);
 exports.default = User;

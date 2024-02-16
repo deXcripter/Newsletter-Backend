@@ -1,6 +1,7 @@
 export interface iUserModel {
   email: {};
   name: {};
+  active: {};
 }
 
 export interface iBody {

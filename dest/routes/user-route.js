@@ -5,4 +5,5 @@ const express_1 = require("express");
 const Route = (0, express_1.Router)();
 Route.get('/', user_controller_1.getAllSubscribers);
 Route.post('/', user_controller_1.subscribe);
+Route.patch('/', user_controller_1.unSubscribe);
 exports.default = Route;

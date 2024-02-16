@@ -6,7 +6,6 @@ import path from 'path';
 
 // third-parties & configs
 import app from './app';
-import appError from './utils/appError';
 dotenv.config({ path: path.resolve(__dirname, '../config.env') });
 
 // server

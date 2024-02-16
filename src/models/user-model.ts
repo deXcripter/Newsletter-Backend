@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import validator from 'validator';
 import { iUserModel } from '../utils/interface';
+import { throws } from 'assert';
 
 const userSchema = new mongoose.Schema<iUserModel>({
   name: {
@@ -14,6 +15,16 @@ const userSchema = new mongoose.Schema<iUserModel>({
     trim: true,
     lowercase: true,
   },
+  active: {
+    type: Boolean,
+    default: true,
+    select: false,
+  },
+});
+
+userSchema.pre(/^find/, function (next) {
+  (this as any).find({ active: { $ne: false } });
+  next();
 });
 
 const User = mongoose.model('User', userSchema);

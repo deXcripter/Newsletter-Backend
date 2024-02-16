@@ -30,3 +30,32 @@ export const getAllSubscribers: RequestHandler = async (req, res, next) => {
     next(err);
   }
 };
+
+export const unSubscribe: RequestHandler = async (req, res, next) => {
+  try {
+    const { email } = req.body as iBody;
+    if (!email) return next(new appError('Please enter an email', 401));
+
+    const user = await User.findOne({ email }).select('+active');
+    if (!user) return next(new appError('No user found with this email', 404));
+
+    (user as any).active = false;
+    (user as any).save();
+
+    res.status(200).send({ status: 'success', message: 'user unsubscribed' });
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const deleteUser: RequestHandler = async (req, res, next) => {
+  try {
+    const { email } = req.body as iBody;
+    if (!email) return next(new appError('Please enter an email', 401));
+
+    await User.findOneAndDelete({ email });
+    res.status(204).json({ status: 'success', message: 'user deleted' });
+  } catch (err) {
+    next(err);
+  }
+};

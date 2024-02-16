@@ -21,7 +21,7 @@ const handleOperationalErrors = (err, req, res) => {
 };
 const handleError11000 = (err, req, res) => {
     const key = Object.keys(err.keyValue);
-    const message = `${key} is already in use. Please choose another`;
+    const message = `${key} is already subscribed`;
     return new appError_1.default(message, 400);
 };
 const handleValidationError = (err, req, res) => {
