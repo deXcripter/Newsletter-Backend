@@ -54,6 +54,7 @@ export const deleteUser: RequestHandler = async (req, res, next) => {
     if (!email) return next(new appError('Please enter an email', 401));
 
     await User.findOneAndDelete({ email });
+
     res.status(204).json({ status: 'success', message: 'user deleted' });
   } catch (err) {
     next(err);
