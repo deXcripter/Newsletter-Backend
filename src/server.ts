@@ -1,10 +1,13 @@
-import http from "http";
-import app from "./app";
-import dotenv from "dotenv";
-import path from "path";
+// core
+import http from 'http';
+import dotenv from 'dotenv';
+import path from 'path';
 
-dotenv.config({ path: path.resolve(__dirname, "../config.env") });
+// third-parties & configs
+import app from './app';
+dotenv.config({ path: path.resolve(__dirname, '../config.env') });
 
+// server
 const server = http.createServer(app);
 
 server.listen(process.env.PORT, () => {

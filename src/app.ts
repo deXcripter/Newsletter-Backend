@@ -1,9 +1,13 @@
-import express from "express";
+import express from 'express';
+import userRoute from './routes/user-route';
 
 const app = express();
 
-app.get('"', (req, res, next) => {
-  return res.status(200).send("Hello from the server");
+app.use('api/v1/users', userRoute);
+app.all('*', (req, res, next) => {
+  res
+    .status(404)
+    .json({ status: 'success', message: 'this route does not exist' });
 });
 
 export default app;
