@@ -3,7 +3,7 @@ import { Router } from 'express';
 
 const Route = Router();
 
-Route.post('/', subscribe);
 Route.get('/', getAllSubscribers);
+Route.post('/', subscribe);
 
 export default Route;
