@@ -11,8 +11,6 @@ dotenv.config({ path: path.resolve(__dirname, '../config.env') });
 // server
 const server = http.createServer(app);
 
-// console.log(process.env.LOCAL_DATABASE!);
-
 mongoose
   .connect(process.env.LOCAL_DATABASE!)
   .then(() => console.log('DB connected'))
