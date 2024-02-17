@@ -11,6 +11,18 @@ const subscribe = async (req, res, next) => {
         const { email } = req.body;
         if (!email)
             return next(new appError_1.default('Enter your email', 401));
+        // const existing = await User.findOne({ email }).select('+active');
+        // console.log(await User.findOne({ email }));
+        // if (existing) {
+        //   existing.active = true;
+        //   await existing.save();
+        //   return res.status(201).json({
+        //     status: 'success',
+        //     message: 'User resubscribed',
+        //     data: { existing },
+        //   });
+        // }
+        // subscribe a new user
         const body = {
             email,
         };
