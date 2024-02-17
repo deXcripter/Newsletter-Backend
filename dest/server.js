@@ -14,12 +14,15 @@ dotenv_1.default.config({ path: path_1.default.resolve(__dirname, '../config.env
 // server
 const server = http_1.default.createServer(app_1.default);
 mongoose_1.default
-    .connect(process.env.LOCAL_DATABASE)
-    .then(() => console.log('DB connected'))
+    .connect(process.env.DATABASE)
+    .then(() => {
+    console.log('DB connected');
+    // run the server if connected
+    server.listen(process.env.PORT || 4040, () => {
+        console.log(`Server is running on port ${process.env.PORT}`);
+    });
+})
     .catch((err) => {
-    console.log(err);
+    console.log(err.message);
     process.exit(1);
-});
-server.listen(process.env.PORT || 4040, () => {
-    console.log(`Server is running on port ${process.env.PORT}`);
 });
