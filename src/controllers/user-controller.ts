@@ -75,19 +75,3 @@ schedule('0 0 * * *', () => {
   console.log('processing inactive users to delete');
   deleteUsersAutomatically();
 });
-
-/* // remember adjust this
-export const deleteUser: RequestHandler = async (req, res, next) => {
-  try {
-    const { email } = req.body as iBody;
-    if (!email) return next(new appError('Please enter an email', 401));
-
-    await User.findOneAndDelete({ email });
-
-    res.status(204).json({ status: 'success', message: 'User deleted' });
-  } catch (err) {
-    next(err);
-  }
-};
-
-*/
