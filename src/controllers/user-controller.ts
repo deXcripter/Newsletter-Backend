@@ -2,6 +2,7 @@ import { RequestHandler } from 'express';
 import User from '../models/user-model';
 import { iBody } from '../utils/interface';
 import appError from '../utils/appError';
+import { schedule } from 'node-cron';
 
 export const subscribe: RequestHandler = async (req, res, next) => {
   try {
@@ -51,6 +52,29 @@ export const unSubscribe: RequestHandler = async (req, res, next) => {
     next(err);
   }
 };
+
+async function deleteUsersAutomatically() {
+  try {
+    const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
+
+    const inactiveUsers = await User.find({
+      inactiveSince: { $lt: thirtyDaysAgo },
+    });
+
+    await User.deleteMany({
+      _id: { $in: inactiveUsers.map((user) => user._id) },
+    });
+
+    console.log(`${inactiveUsers} deleted`);
+  } catch (err) {
+    ('Error deleting user(s)');
+  }
+}
+
+schedule('0 0 * * *', () => {
+  console.log('processing inactive users to delete');
+  deleteUsersAutomatically();
+});
 
 /* // remember adjust this
 export const deleteUser: RequestHandler = async (req, res, next) => {
