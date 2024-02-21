@@ -37,18 +37,22 @@ export const unSubscribe: RequestHandler = async (req, res, next) => {
     const { email } = req.body as iBody;
     if (!email) return next(new appError('Please enter an email', 401));
 
-    const user = await User.findOne({ email }).select('+active');
+    const user = await User.findOne({ email }).select('+active +inactiveSince');
     if (!user) return next(new appError('No user found with this email', 404));
 
     (user as any).active = false;
+    (user as any).inactiveSince = new Date(Date.now());
     (user as any).save();
 
-    res.status(200).send({ status: 'success', message: 'user unsubscribed' });
+    console.log(user);
+
+    res.status(200).send({ status: 'success', message: 'User unsubscribed' });
   } catch (err) {
     next(err);
   }
 };
 
+/* // remember adjust this
 export const deleteUser: RequestHandler = async (req, res, next) => {
   try {
     const { email } = req.body as iBody;
@@ -56,8 +60,10 @@ export const deleteUser: RequestHandler = async (req, res, next) => {
 
     await User.findOneAndDelete({ email });
 
-    res.status(204).json({ status: 'success', message: 'user deleted' });
+    res.status(204).json({ status: 'success', message: 'User deleted' });
   } catch (err) {
     next(err);
   }
 };
+
+*/

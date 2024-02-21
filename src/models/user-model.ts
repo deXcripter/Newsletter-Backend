@@ -20,6 +20,10 @@ const userSchema = new mongoose.Schema<iUserModel>({
     default: true,
     select: false,
   },
+  inactiveSince: {
+    type: Date,
+    select: false,
+  },
 });
 
 userSchema.pre(/^find/, function (next) {

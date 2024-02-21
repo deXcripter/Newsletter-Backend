@@ -2,6 +2,7 @@ export interface iUserModel {
   email: {};
   name: {};
   active: {};
+  inactiveSince: {};
 }
 
 export interface iBody {
