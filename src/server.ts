@@ -12,7 +12,7 @@ dotenv.config({ path: path.resolve(__dirname, '../config.env') });
 const server = http.createServer(app);
 
 mongoose
-  .connect(process.env.LOCAL_DATABASE!)
+  .connect(process.env.DATABASE!)
   .then(() => {
     console.log('DB connected');
 
